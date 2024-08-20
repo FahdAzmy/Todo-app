@@ -1,24 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import TodoList from "./components/TodoList";
+import "./App.css";
+import { v4 as id } from "uuid";
 
+import { todocContext } from "./components/contexts/TodoContexst";
+import { React, useState } from "react";
+const initailTodos = [
+  {
+    id: id(),
+    title: "Finish Todo Project",
+    detials: "Tarmiiz Academy",
+    isCompleted: false,
+  },
+  {
+    id: id(),
+    title: "Finish Todo Add",
+    detials: "Myself",
+    isCompleted: false,
+  },
+  {
+    id: id(),
+    title: "Fininsh Social Media App",
+    detials: "Youtube",
+    isCompleted: false,
+  },
+  {
+    id: id(),
+    title: "Fininsh Social Media App",
+    detials: "Youtube",
+    isCompleted: false,
+  },
+];
 function App() {
+  const [todos, setTodos] = useState(initailTodos);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <todocContext.Provider value={{ todos: todos, setTodos: setTodos }}>
+      <div
+        className="App"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#191b1f",
+        }}
+      >
+        <TodoList />
+      </div>
+    </todocContext.Provider>
   );
 }
 
